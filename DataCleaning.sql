@@ -77,6 +77,71 @@ from layoffs_stagging2
 where row_num > 1;
 
 
+-- standadize the data
+
+select distinct company
+from layoffs_stagging2;
+
+select distinct TRIM(company)
+from layoffs_stagging2;
+
+select company , TRIM(company)
+from layoffs_stagging2;
+
+Update layoffs_stagging2
+set company = TRIM(company);
+
+-- done
+-- now for industry column
+
+select distinct industry
+from layoffs_stagging2
+order by 1;
+
+select *
+from layoffs_stagging2
+where industry like 'Crypto%';
+
+update layoffs_stagging2
+set industry = 'Crypto'
+where industry like 'Crypto%';
+
+select distinct industry
+from layoffs_stagging2;
+
+select distinct country
+from layoffs_stagging2
+order by 1;
+
+select *
+from layoffs_stagging2
+where country like 'United States%'
+order by 1;
+
+select distinct country , TRIM(TRAILING '.' from country)
+from layoffs_stagging2
+order by 1;
+
+update layoffs_stagging2
+set counntry = TRIM(TRAILING '.' from country)
+where country like 'United States%';
+
+select distinct country
+from layoffs_stagging2;
+
+select `date`,
+STR_TO_DATE(`date`,'%m/%d/%Y')
+from layoffs_stagging2;
+
+update layoffs_stagging2
+set `date`= STR_TO_DATE(`date`,'%m/%d/%Y');
+
+Alter table layoffs_stagging2
+modify column `date` DATE;
+
+
+
+
 
 
 
