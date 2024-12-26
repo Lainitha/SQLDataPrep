@@ -140,6 +140,60 @@ Alter table layoffs_stagging2
 modify column `date` DATE;
 
 
+select *
+from layoffs_stagging2
+where total_laid_off is null;
+
+select *
+from layoffs_stagging2
+where total_laid_off is null
+and percentage_laid_off is null;
+
+select *
+from layoffs_stagging2
+where industry is null
+or industry ='';
+
+
+update layoffs_stagging2
+SET industry = NULL
+WHERE industry = '' ;
+
+select *
+from layoffs_stagging2
+where company = 'Airbnb';
+
+select t1.industry, t2.industry
+from layoffs_stagging2 t1
+join layoffs_stagging2 t2
+	on t1.company=t2.company
+where (t1.industry is null or t1.industry='')
+and t2.industry is not null;
+
+update layoffs_stagging2 t1
+join layoffs_stagging2 t2
+	on t1.company=t2.company
+SET t1.industry = t2.industry
+where t1.industry is null
+and t2.industry is not null;
+
+select *
+from layoffs_stagging2
+where total_laid_off is null
+and percentage_laid_off is null;
+
+delete
+from layoffs_stagging2
+where total_laid_off is null
+and percentage_laid_off is null;
+
+select *
+from layoffs_stagging2;
+
+alter table layoffs_stagging2
+drop column row_num;
+
+
 
 
 
